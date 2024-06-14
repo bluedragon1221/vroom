@@ -63,34 +63,6 @@ pub fn recall_cmd(
     }
 }
 
-// The fetch command will retrive the item that the user wants and return it.
-// It can not retrive a list of items
-pub fn fetch_cmd(
-    args: (Option<&String>, Option<&String>),
-    vroomfile: &mut Vroomfile,
-) -> Result<String, VroomError> {
-    match args {
-        (None, _) => Err(VroomError::MissingArgument("item_name or list_name".into())),
-        (Some(something), None) => {
-            if let Ok(_list) = vroomfile.get_mut_list(something) {
-                Err(VroomError::MissingArgument("item_name".into()))
-            } else {
-                if let Ok(item) = vroomfile.get_mut_item(something) {
-                    Ok(item.get_value())
-                } else {
-                    Err(VroomError::NoSuchItemAny(something.into()))
-                }
-            }
-        }
-        (Some(maybe_list_name), Some(maybe_item_name)) => {
-            let list = vroomfile.get_mut_list(maybe_list_name)?;
-            let item = list.get_mut_item(maybe_item_name)?;
-
-            Ok(item.get_value())
-        }
-    }
-}
-
 // The add command will add a new item to the vroomfile, given the list to add it to.
 // If only one argument is specified, it will create a new list with that name.
 pub fn add_cmd(
@@ -113,6 +85,10 @@ pub fn add_cmd(
         (Some(maybe_list_name), Some(maybe_item_name), Some(value)) => {
             let list = vroomfile.get_mut_list(maybe_list_name)?;
             if let Ok(item) = list.get_mut_item(maybe_item_name) {
+                println!(
+                    "'{}' in '{}' is '{}'",
+                    maybe_item_name, maybe_list_name, value
+                );
                 item.set_value(value);
                 Ok(())
             } else {

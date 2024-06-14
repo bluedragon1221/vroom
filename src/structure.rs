@@ -55,7 +55,6 @@ impl List {
         self.contents.retain(|x| x.name != name)
     }
 
-    #[must_use]
     pub fn get_mut_item(&mut self, item_name: &str) -> Result<&mut Item, VroomError> {
         self.contents
             .iter_mut()
@@ -74,7 +73,6 @@ impl Vroomfile {
         self.contents.push(List::new(list_name))
     }
 
-    #[must_use]
     pub fn get_mut_list(&mut self, list_name: &str) -> Result<&mut List, VroomError> {
         self.contents
             .iter_mut()
@@ -102,7 +100,6 @@ impl Vroomfile {
         res.into_iter().flatten().collect()
     }
 
-    #[must_use]
     pub fn get_mut_item(&mut self, item_name: &str) -> Result<&mut Item, VroomError> {
         self.flat_items()
             .into_iter()
