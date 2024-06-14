@@ -1,2 +1,2 @@
 # vroom
-Like `boom` but faster. Vrooooom!
+Like [`boom`](https://github.com/holman/boom) but faster. Vrooooom!
