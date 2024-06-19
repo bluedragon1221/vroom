@@ -3,6 +3,14 @@ name = "vroom"
 version = "0.1.0"
 edition = "2021"
 
+license = "MIT"
+description = "Like [`boom`](https://github.com/holman/boom) but faster. Vrooooom!"
+homepage = "https://github.com/bluedragon1221/vroom"
+repository = "https://github.com/bluedragon1221/vroom"
+readme = "README.md"
+
+keywords = ["cli", "terminal", "json", "serde"]
+
 [dependencies]
 serde = "1.0.203"
 serde_derive = "1.0.203"
